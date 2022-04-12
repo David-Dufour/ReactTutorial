@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import BookAdder from './component/bookAdder/BookAdder.js';
+import BookViewer from './component/bookViewer/BookViewer.js';
 
 function App() {
+  const [books, setBooks] = useState([])
+
+  function handleAddBook(book) {
+    setBooks([...books, book])
+  }
+
+  function onEditBook(book) {
+    console.log("EDITING " + book.title)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container-fluid px-5">
+      <h1 className="text-center py-5">BOOK MANAGER</h1>
+      <BookAdder addBook={handleAddBook} />
+      <BookViewer books={books} editBook={onEditBook} />
     </div>
   );
 }
