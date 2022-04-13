@@ -1,14 +1,17 @@
-// import httpClient from './httpClient';
-// import { BookRequest }
+import axios from 'axios';
+import BookRequest from './BookRequest'
+import { toModel } from '../services/BookAssembler.ts'
 
-// const BASE_URL = 'counter';
+const BASE_URL = 'https://openlibrary.org/isbn/';
+const CONTENT_TYPE = '.json';
 
-// function getCounter(): Promise<Counter> {
-//   return httpClient.get<number>(BASE_URL).then(res => create(res.data));
-// }
+async function fetchBook(isbn: string): Promise<BookRequest> {
+    try {
+        const response = await axios.get<BookRequest>(BASE_URL + isbn + CONTENT_TYPE);
+        return toModel(response.data);
+    } catch (error) {
+        console.warn(error);
+    }
+}
 
-// function updateCounter(counter: Counter): Promise<Counter> {
-//   return httpClient.put<number>(BASE_URL, { count: counter.value }).then(res => create(res.data));
-// }
-
-// export { getCounter, updateCounter };
+export { fetchBook };

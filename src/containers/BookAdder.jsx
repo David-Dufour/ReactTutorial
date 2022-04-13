@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import Book from '../models/Book'
+import { fetchBook } from '../infrastructures/BookAPIService.ts'
 
 export default function BookAdder({ addBook }) {
     const isbns = [
@@ -16,15 +16,20 @@ export default function BookAdder({ addBook }) {
 
     function handleAddBook() {
         const isbn = isbnRef.current.value
-        const book = new Book(isbn, 2021, "David Dufour", "A very interesting book that everyone loves so much that it requires multiples lines of text to describe.")
-        addBook(book)
-        isbnRef.current.value = null
+        const book = fetchBook(isbn);
+
+        if (book) {
+            addBook(book)
+            isbnRef.current.value = null
+        }
+        else {
+
+        }
     }
 
     function handleAddRandomBook() {
-        const isbn = isbns[Math.floor(Math.random() * isbns.length)];
-        const book = new Book(isbn, 2021, "David Dufour", "A very interesting book that everyone loves so much that it requires multiples lines of text to describe.")
-        addBook(book)
+        const randomIsbn = isbns[Math.floor(Math.random() * isbns.length)];
+        addBook(fetchBook(randomIsbn))
     }
 
     return (
