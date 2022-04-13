@@ -16,17 +16,16 @@ export default function ListBooksForm() {
         else {
             setBooks([...books, book])
             setMessage("")
-            setMessageType("bg-light")
+            setMessageType("invisible")
         }
     }
 
-    function onEditBook(book) {
-        console.log("EDITING " + book.title)
+    function onEditBook(title) {
+        console.warn("WIP: Must navigate to EditBookForm for book: " + title)
     }
 
-    function onRemoveBook(book) {
-        setBooks(books.filter((b) => b !== book))
-        console.log("REMOVING " + book.title)
+    function onRemoveBook(title) {
+        setBooks(books.filter((b) => b.title !== title))
     }
 
     return (

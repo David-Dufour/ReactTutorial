@@ -1,9 +1,11 @@
-import BookCard from '../components/BookCard.jsx'
+import Card from '../components/Card'
+import CardItem from '../components/CardItem'
 
 export default function BookViewer({ books, editBook, removeBook }) {
     return (
         books.map(book => {
-            return <BookCard key={book.title} book={book} edit={editBook} remove={removeBook} />
+            let cardItem = new CardItem(book.title, book.year, book.author, book.description)
+            return <Card key={book.title} item={cardItem} edit={editBook} remove={removeBook} />
         })
     )
 }
