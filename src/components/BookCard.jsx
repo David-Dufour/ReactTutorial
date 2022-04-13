@@ -1,23 +1,22 @@
 import PropTypes from 'prop-types'
-import Book from '../../model/Book'
+import Book from '../models/Book'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 import { faXmark, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 
-BookItem.propTypes = {
+BookCard.propTypes = {
   book: PropTypes.instanceOf(Book).isRequired,
-  editBook: PropTypes.func,
-  removeBook: PropTypes.func,
+  edit: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired,
 }
 
-export default function BookItem({ book, editBook, removeBook }) {
+export default function BookCard({ book, edit, remove }) {
 
   function onEditClick() {
-    editBook(book)
+    edit(book)
   }
 
   function onRemoveClick() {
-    removeBook(book)
+    remove(book)
   }
 
   return (

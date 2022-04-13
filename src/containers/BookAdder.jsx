@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import Book from '../../model/Book'
+import Book from '../models/Book'
 
 export default function BookAdder({ addBook }) {
     const isbns = [

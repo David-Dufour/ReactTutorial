@@ -1,25 +1,28 @@
 import React from 'react'
 import Book from '../../model/Book'
 
-export default function BookForm(book) {
+export default function EditBookForm(book, saveBook) {
 
-    BookItem.propTypes = {
+    BookForm.propTypes = {
         book: PropTypes.instanceOf(Book),
-        bookClick: PropTypes.func,
-      }
+        saveBook: PropTypes.func,
+    }
 
-    function updateSubmit(event) {
+    function save(event) {
+        event.preventDefault();
+    }
+
+    function cancel(event) {
         event.preventDefault();
     }
 
     return (
-        <form onSubmit={this.updateSubmit}>
-            <h1>Uncontrolled Form Example</h1>
-            <label>Name:
+        <form onSubmit={save} onAbort={cancel}>
+            <h1>WORK IN PROGRESS</h1>
+            <label>Title:
                 <input type="text" ref={this.input} />
             </label>
-            <label>
-                CompanyName:
+            <label>Author:
                 <input type="text" ref={this.input} />
             </label>
             <input type="submit" value="Submit" />
