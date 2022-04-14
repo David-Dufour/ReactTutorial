@@ -3,34 +3,46 @@ import BookAdder from '../containers/BookAdder.jsx';
 import BookViewer from '../containers/BookViewer.jsx';
 
 export default function ListBooksForm() {
+    const INEXISTENT_BOOK = "The book does not exist.";
+    const UNABLE_TO_EDIT_BOOKS = "Editing books is currently not supported.";
+    const DUPLICATE_BOOK = "The book is already listed. It cannot be added twice.";
+
+
     const [books, setBooks] = useState([])
     const [message, setMessage] = useState("")
-    const [messageType, setMessageType] = useState("bg-light")
+    const [messageType, setMessageType] = useState("invisible")
+
+    function displayError(message) {
+        setMessage(message)
+        setMessageType("bg-danger text-white")
+    }
+
+    function resetDisplay() {
+        setMessage("")
+        setMessageType("invisible")
+    }
 
     function onAddBook(book) {
         const isPresent = books.filter((b) => b.title === book?.title).length > 0
         if (isPresent) {
-            setMessage("The book \"" + book?.title + "\" is already listed. It cannot be added twice.")
-            setMessageType("bg-danger text-white")
+            displayError(DUPLICATE_BOOK)
         }
         else if (book === undefined) {
-            setMessage("The book does not exist.")
-            setMessageType("bg-danger text-white")
+            displayError(INEXISTENT_BOOK)
         }
         else {
             setBooks([...books, { ...book }])
-            setMessage("")
-            setMessageType("invisible")
+            resetDisplay()
         }
     }
 
     function onEditBook(title) {
-        setMessage("WIP: editing the book \"" + title + "\" is currently not supported.")
-        setMessageType("bg-warning")
+        displayError(UNABLE_TO_EDIT_BOOKS)
     }
 
     function onRemoveBook(title) {
         setBooks(books.filter((b) => b.title !== title))
+        resetDisplay()
     }
 
     return (
