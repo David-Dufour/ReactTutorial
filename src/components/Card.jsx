@@ -22,13 +22,10 @@ export default function Card({ item, edit, remove }) {
   return (
     <div className="card text-white bg-dark">
       <div className="row g-0 pt-2 card-header">
-        <div className="col-md-3">
-          <h4>{item.title}</h4>
+        <div className="col-md-11">
+          <h4>{item.title} ({item.year})</h4>
         </div>
-        <div className="col-md-7">
-          <h5>({item.year})</h5>
-        </div>
-        <div className="col-md-2 ps-5">
+        <div className="col-md-1">
           <FontAwesomeIcon className='px-3' icon={faPenToSquare} onClick={onEditClick} />
           <FontAwesomeIcon icon={faXmark} onClick={onRemoveClick} />
         </div>
@@ -36,7 +33,7 @@ export default function Card({ item, edit, remove }) {
 
       <div className="card-body text-dark bg-light">
         <h5 className="card-subtitle">{item.subtitle}</h5>
-        <p className="card-text">{item.text}</p>
+        <p className="card-text">{item.description}</p>
       </div>
     </div>
   )

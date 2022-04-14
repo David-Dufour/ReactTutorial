@@ -27,7 +27,6 @@ export default function ListBooksForm() {
     function onEditBook(title) {
         setMessage("WIP: editing the book \"" + title + "\" is currently not supported.")
         setMessageType("bg-warning")
-        console.warn("WIP: Must navigate to EditBookForm for book: " + title)
     }
 
     function onRemoveBook(title) {
