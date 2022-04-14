@@ -1,5 +1,6 @@
 export default class CardItem {
-    constructor(title, year, subtitle, description) {
+    constructor(key, title, year, subtitle, description) {
+        this.key = title;
         this.title = title;
         this.year = year;
         this.subtitle = subtitle;

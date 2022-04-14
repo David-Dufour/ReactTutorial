@@ -1,9 +1,9 @@
-import ListBooksForm from "./forms/ListBooksForm"
+import MainPage from "./views/MainPage"
 
 function App() {
 
   return (
-    <ListBooksForm />
+    <MainPage />
   );
 }
 

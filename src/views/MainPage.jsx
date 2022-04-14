@@ -8,19 +8,25 @@ export default function ListBooksForm() {
     const [messageType, setMessageType] = useState("bg-light")
 
     function onAddBook(book) {
-        const isPresent = books.filter((b) => b.title === book.title).length > 0
+        const isPresent = books.filter((b) => b.title === book?.title).length > 0
         if (isPresent) {
-            setMessage("The book \"" + book.title + "\" is already listed. It cannot be added twice.")
+            setMessage("The book \"" + book?.title + "\" is already listed. It cannot be added twice.")
+            setMessageType("bg-danger text-white")
+        }
+        else if (book === undefined) {
+            setMessage("The book does not exist.")
             setMessageType("bg-danger text-white")
         }
         else {
-            setBooks([...books, book])
+            setBooks([...books, { ...book }])
             setMessage("")
             setMessageType("invisible")
         }
     }
 
     function onEditBook(title) {
+        setMessage("WIP: editing the book \"" + title + "\" is currently not supported.")
+        setMessageType("bg-warning")
         console.warn("WIP: Must navigate to EditBookForm for book: " + title)
     }
 

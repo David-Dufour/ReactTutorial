@@ -1,8 +1,8 @@
 import { useRef } from 'react'
 import { fetchBook } from '../infrastructures/BookAPIService.ts'
 
-export default function BookAdder({ addBook }) {
-    const isbns = [
+export default function BookAdder({ addBook, logError }) {
+    const randomIsbns = [
         '9780747542988',
         '9781501110368',
         '9781925483598',
@@ -16,20 +16,18 @@ export default function BookAdder({ addBook }) {
 
     function handleAddBook() {
         const isbn = isbnRef.current.value
-        const book = fetchBook(isbn);
-
-        if (book) {
-            addBook(book)
-            isbnRef.current.value = null
-        }
-        else {
-
-        }
+        addBookWith(isbn)
     }
 
     function handleAddRandomBook() {
-        const randomIsbn = isbns[Math.floor(Math.random() * isbns.length)];
-        addBook(fetchBook(randomIsbn))
+        const randomIsbn = randomIsbns[Math.floor(Math.random() * randomIsbns.length)];
+        addBookWith(randomIsbn)
+    }
+
+    async function addBookWith(isbn) {
+        const book = await fetchBook(isbn);
+        addBook(book)
+        isbnRef.current.value = null
     }
 
     return (
